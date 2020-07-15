@@ -39,6 +39,7 @@ public class ClienteService {
 		return clienteRepository.findAll();
 
 	}
+	
 }
 
 //TODO: Criar metodos na ClienteController, usar metodo clienteRepo.findAll, criar metodo pra listar todos usando o postman!!!

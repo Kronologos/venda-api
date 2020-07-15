@@ -37,8 +37,11 @@ public class ClienteController {
 	@GetMapping(path = "/listarTodos")
 	public List<Cliente> listarTodos() {
 		List<Cliente> clientes = this.clienteService.listaTodos();
+		System.out.println("Change");
 		return clientes;
-
+		
 	}
+	
+
 
 }
