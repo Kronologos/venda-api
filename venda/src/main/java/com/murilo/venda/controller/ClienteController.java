@@ -3,6 +3,7 @@ package com.murilo.venda.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.murilo.venda.entity.Cliente;
@@ -39,9 +41,20 @@ public class ClienteController {
 		List<Cliente> clientes = this.clienteService.listaTodos();
 		System.out.println("Change");
 		return clientes;
-		
+
 	}
-	
 
+	@GetMapping(path = "/listarClientePorId")
+	public ResponseEntity<Cliente> listarClientePorId(@RequestParam(name = "idCliente") Long id) {
+		try {
+			return new ResponseEntity<Cliente>(clienteService.listarClientePorId(id), HttpStatus.OK);
+		} catch (Exception e) {
+			HttpHeaders headers = new HttpHeaders();
+			headers.add("Erro", e.getMessage());
+			return new ResponseEntity<Cliente>(headers, HttpStatus.BAD_REQUEST);
+		}
 
+	}
+
+//TODO: Ler ctrl+espaço de RequestParam, uso de headers
 }

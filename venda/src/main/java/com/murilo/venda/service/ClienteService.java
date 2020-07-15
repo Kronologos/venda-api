@@ -28,7 +28,6 @@ public class ClienteService {
 		if (c.getCpf().equals("")) {
 			return null;
 		}
-
 		c.setDatCads(new Date());
 
 		return clienteRepository.save(c);
@@ -39,7 +38,15 @@ public class ClienteService {
 		return clienteRepository.findAll();
 
 	}
-	
+
+	public Cliente listarClientePorId(Long id) throws Exception {
+		if (id == null || id <= 0) {
+			throw new IllegalArgumentException("Id Inválido!!!");
+		}
+		return this.clienteRepository.findById(id).orElseThrow(() -> new RuntimeException("Deu não viu"));
+
+	}
+
 }
 
-//TODO: Criar metodos na ClienteController, usar metodo clienteRepo.findAll, criar metodo pra listar todos usando o postman!!!
+//TODO: Estudar metodos do Optional
